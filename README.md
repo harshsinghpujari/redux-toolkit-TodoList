@@ -1,12 +1,76 @@
-# React + Vite
+# 📝 Redux Todo List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and modern Todo List application built using **React** and **Redux Toolkit**. It demonstrates how to manage global state using Redux and perform CRUD operations on todo items.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add new todo items
+- Update existing todos
+- Delete todos
+- Keyboard support (Enter to update)
+- Auto-focus on input when updating
+- Global state management using Redux Toolkit
+- Clean, responsive UI using Tailwind CSS
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Redux Toolkit
+- Tailwind CSS
+- Vite
+
+## 📂 Folder Structure
+
+src/
+├── app/
+│ └── store.js # Redux store configuration
+├── components/
+│ └── AddTodo.jsx # Input form for adding todos
+│ └── Todos.jsx # Renders and manages todo list
+├── features/
+│ └── todo/
+│ └── todoSlice.js # Redux slice for todo logic
+└── main.jsx # React root
+
+
+## 🚧 Installation and Running Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/redux-todo-list.git
+cd redux-todo-list
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+#Open your browser and navigate to http://localhost:5173
+
+✨ Learnings
+
+    How to use createSlice from Redux Toolkit
+
+    Immutability in reducers
+
+    useSelector and useDispatch hooks
+
+    Managing form inputs and focus with useRef
+
+📌 Future Improvements
+
+    Persist todos in localStorage
+
+    Add due dates or priorities
+
+    Mark todos as completed
+
+    Add filters (All, Completed, Incomplete)
+
+📄 License
+
+This project is open-source and free to use.
+
+✍🏻Author
+Himanshu Singh
