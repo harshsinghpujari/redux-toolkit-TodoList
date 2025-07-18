@@ -1,10 +1,35 @@
-import React from 'react'
+import React, { useState,useRef,useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {removeTodo} from '../features/todo/todoSlice'
+import {removeTodo,updateTodo} from '../features/todo/todoSlice'
 
 function Todos() {
+
     const todos = useSelector(state => state.todos)
     const dispatch = useDispatch()
+
+    const [editId,setEditId]  = useState(null)
+    const [editText,setEditText] = useState("")
+ 
+
+    const handleEditClick = (todo) => {
+      setEditId(todo.id)
+      setEditText(todo.text)
+    }
+
+    const handleUpdateClick = () => {
+      dispatch(updateTodo({id:editId , text:editText }))
+      setEditId(null)
+      setEditText("")
+    }
+
+    const inputRef = useRef(null);
+
+    useEffect(()=>{
+      if(inputRef.current){
+        inputRef.current.focus();
+      }
+
+    },[editId])
 
   return (
     <>
@@ -15,7 +40,42 @@ function Todos() {
             className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            <div className='text-white'>{todo.text}</div>
+            {editId === todo.id ? 
+            (
+              <input
+               ref = {inputRef}
+               type="text" 
+               value={editText}
+               onChange={(e) => setEditText(e.target.value)}
+               onKeyDown={(e) => {
+                if(e.key === 'Enter')
+                  handleUpdateClick()
+               }}
+               className='mx-2 px-2 rounded text-black'/>
+            ) : 
+            <div className='text-white'>{todo.text}</div>}
+
+      
+          <div className='flex gap-2'>
+
+            {editId === todo.id ? 
+             (
+              <button 
+              onClick={handleUpdateClick}
+              className=" text-white bg-amber-100 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md">
+              ✅
+              </button>
+             ) : (
+
+              <button 
+              onClick={() => handleEditClick(todo)}
+              className=" text-white bg-amber-100 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md">
+              <img src="/images/update_icon.png
+              " alt="update icon image" className='w-6 h-6'/>
+              </button>
+             ) 
+            }
+
             <button
              onClick={() => dispatch(removeTodo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
@@ -35,6 +95,10 @@ function Todos() {
                 />
               </svg>
             </button>
+
+            
+          </div>
+            
           </li>
         ))}
       </ul>
